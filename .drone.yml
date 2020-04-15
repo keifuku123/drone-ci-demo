@@ -5,4 +5,4 @@ steps:
 - name: hello-world
   image: docker
   commands:
-    - echo "H`ello world"
+    - echo "Hello world"
