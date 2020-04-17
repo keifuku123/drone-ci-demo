@@ -1,8 +1,23 @@
-kind: pipeline
-name: deploy
+kind: pipeline  
+name: deploy  
+  
+steps:  
+  - name: unit-test  
+    image: node:10  
+    commands:  
+      - node test/index.js  
+    when:  
+      branch: master  
+      event: push  
+ 
+  - name: build-image  
+    image: plugins/docker  
+    settings:  
+      repo: keifuku123/drone-ci-demo  
+      username: keifuku123 
+      password:  
+        from_secret: DOCKER_PASSWORD  
+      auto_tag: true  
+    when:  
+      event: tag
 
-steps:
-- name: hello-world
-  image: docker
-  commands:
-    - echo "Hello world5"
