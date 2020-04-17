@@ -20,4 +20,21 @@ steps:
       auto_tag: true  
     when:  
       event: tag
-
+          
+  - name: k8s-deploy  
+    image: quay.io/honestbee/drone-kubernetes  
+    settings:  
+      kubernetes_server:  
+        from_secret: KUBERNETES_SERVER  
+      kubernetes_cert:  
+        from_secret: KUBERNETES_CERT  
+      kubernetes_token:  
+        from_secret: KUBERNETES_TOKEN  
+      namespace: default  
+      deployment: ci-demo-deployment  
+      repo: keifuku123/drone-ci-demo  
+      container: ci-demo  
+      tag:  
+        - ${DRONE_TAG}  
+    when:  
+      event: tag
