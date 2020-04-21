@@ -1,16 +1,20 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ci-demo-deployment
   namespace: default
-  labels:
-    app: ci-demo
 spec:
+  selector:
+    matchLabels:
+      app: ci-demo
   replicas: 1
   template:
+    metadata:
+      labels:
+        app: ci-demo
     spec:
       containers:
-        - image: keifuku123/drone-ci-demo
-          name: ci-demo
+      - image: keifuku123/drone-ci-demo:1.0.5
+        name: ci-demo
       restartPolicy: Always
