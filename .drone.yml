@@ -35,6 +35,6 @@ steps:
       repo: keifuku123/drone-ci-demo  
       container: ci-demo  
       tag:  
-        - ${DRONE_TAG}  
+        - 1.0.8  
     when:  
       event: tag
